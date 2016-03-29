@@ -41,7 +41,9 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
             // select item
             scope.select = function (index) {
-                delete scope.results[index].btclabel; // delete label from object
+                if (!scope.btcTemplate){
+                    delete scope.results[index].btclabel; // delete label from object
+                }
                 element.controller('ngModel').$setViewValue(scope.results[index]);
                 scope.btcCallback.call();
                 scope.close();
