@@ -2,11 +2,16 @@
 
 > A simple angular autocomplete made for bootstrap3
 
+[Demo](http://signalkuppe.github.io/bootcomplete/)
+
+
 ## Features
 * Seamless integration with bootstrap3 and font-awesome, no extra css needed
 * Zero configuration setup for basic usage
 * Highlighted keyword in suggestions
 * Configurable label for suggestions
+* Close with esc key or blur
+* Selection with enter key or click
 * No results message
 * UI indication during search
 * Advanced usage with custom templates
@@ -37,7 +42,7 @@ Place the autocomplete directive in your view
     btc-maxresults="5"
     btc-size="md"
     btc-label="label"
-    btc-placeholder="Search a city..."             
+    btc-placeholder="Search for something..."             
     btc-query="queryFunction" 
     btc-callback="callbackFunction"
     btc-noresults="No results!"
