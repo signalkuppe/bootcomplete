@@ -24,12 +24,13 @@
         <div class="row">
             <div class="col-md-12">
                <div class="page-header">
-                    <h1>Bootcomplete <small>example</small></h1>
+                    <h1>Bootcomplete <small>dev</small></h1>
                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
+                   <label for="" class="control-label">Google maps api</label>
                     <bootcomplete    
                         btc-minlength="1"
                         btc-maxresults="5"
@@ -55,6 +56,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                    <label for="" class="control-label">openweathermap.org api</label>
                     <bootcomplete    
                         btc-minlength="1"
                         btc-maxresults="3"
@@ -63,7 +65,6 @@
                         btc-query="forecastSearch" 
                         btc-noresults="No results!"
                         btc-callback="forecastCallback"
-                        btc-template="src/forecast.html"
                         btc-template="/src/forecast.html"
                         ng-model="forecast"></bootcomplete>                      
             </div>
@@ -85,7 +86,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://code.angularjs.org/1.5.2/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.2/angular-resource.min.js"></script>
-    <script src="src/bootcomplete.js"></script>
-    <script src="src/app.js"></script>
+    <script src="/src/bootcomplete.js"></script>
+    <script src="/src/app.js"></script>
   </body>
 </html>
