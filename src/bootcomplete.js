@@ -63,7 +63,6 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
             // append element to the DOM
             scope.makeDom = function (html) {
-                //element[0].appendChild(html);
                 document.body.appendChild(html);
             };
 
@@ -93,6 +92,9 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                         }, 100);
 
                     });
+                }
+                if(!scope.search.length) {
+                    scope.close();
                 }
             };
 
