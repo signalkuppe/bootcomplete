@@ -18,7 +18,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             btcCallback: '='
         },
         template: "<div class='input-group input-group-{{btcSize}}'>\n"+
-                  "<input placeholder='{{btcPlaceholder}}' type='text' class='form-control' ng-blur='blur($event)'/>\n"+
+                  "<input placeholder='{{btcPlaceholder}}' type='text' class='form-control' ng-blur='blur($event)' autocomplete=\"off\"/>\n"+
                   "<span class='input-group-addon'><i class='fa fa-refresh' ng-class=\"{'fa-spin': loading }\"></i></span>\n"+
                   "</div>",
         link: function (scope, element, attrs, controller) {
@@ -26,7 +26,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             var input = element[0].querySelector('.form-control'),
                 suggestionTemplate = "<ul class=\"dropdown-menu\" style=\"position:static;display:block;float:none;}\">\n"+
                                         "<li ng-class=\"{'active':selectedIndex === $index}\" ng-repeat=\"result in results\" ng-show=\"results.length\">\n"+
-                                           "<a ng-style=\"{'white-space':'normal'}\" href=\"\" ng-click=\"select($index)\" ng-bind-html=\"result.btclabel\"></a>\n"+
+                                           "<a class=\"btc-clickLink\" ng-style=\"{'white-space':'normal'}\" href=\"\" ng-click=\"select($index)\" ng-bind-html=\"result.btclabel\"></a>\n"+
                                         "</li>\n"+
                                         "<li class=\"disabled\" ng-hide=\"results.length\">\n"+
                                           "<a href=\"\">{{noresultsMsg}}</a>\n"+
@@ -41,9 +41,10 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
             // select item
             scope.select = function (index) {
-                if (!scope.btcTemplate){
+
+                if (!scope.btcTemplate)
                     delete scope.results[index].btclabel; // delete label from object
-                }
+
                 element.controller('ngModel').$setViewValue(scope.results[index]);
                 scope.btcCallback.call();
                 scope.close();
@@ -51,16 +52,20 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
             // close autocomplete 
             scope.close = function () {
-                input.value = '';
-                scope.selectedIndex = -1;
                 scope.visible = false;
+                scope.selectedIndex = -1;
+                input.value = '';
             };
 
             // close on blur
-            scope.blur = function (event) {
-                // close only if the blur target is not a suggestion
-                if (!event.relatedTarget)
+            scope.blur = function (e) {
+                setTimeout(function(){
+                   var focused = document.activeElement;
+                   if(focused.tagName!=='A' && focused.className.indexOf('btc-clickLink')===-1) {
                     scope.close();
+                    scope.$apply();
+                   }// check the elemnt with focus
+                },1);
             };
 
             // append element to the DOM
@@ -123,8 +128,8 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                     if (scope.selectedIndex != -1)
                         scope.select(scope.selectedIndex);
                 }
-                //esc
-                if (e.keyCode === 27) {
+                //esc or tab
+                if (e.keyCode === 27 || e.keyCode === 9) {
                     scope.close();
                 }
 

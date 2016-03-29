@@ -10,7 +10,7 @@
 * Zero configuration setup for basic usage
 * Highlighted keyword in suggestions
 * Configurable label for suggestions
-* Close with esc key or blur
+* Close with esc key, blur or tab
 * Selection with enter key or click
 * No results message
 * UI indication during search
@@ -18,7 +18,7 @@
 
 ### Requirements
 
-* Boostrap
+* Bootstrap
 * Font awesome
 
 ### Basic usage
@@ -46,11 +46,10 @@ Place the autocomplete directive in your view
     btc-query="queryFunction" 
     btc-callback="callbackFunction"
     btc-noresults="No results!"
-    ng-model="city"></bootcomplete>  
+    ng-model="modelvariable"></bootcomplete>  
 ```
 
-Define in your controller the query function (you should return a promise) with the searchstring as a parameter
-In this example ENDPOINT is a factory
+Define in your controller the query function (you should return a promise) with the searchstring as a parameter. In this example ENDPOINT is a factory
 
 ```js
 $scope.queryFunction = function (searchstring) {
@@ -68,8 +67,8 @@ $scope.callbackFunction = function () {
 
 ### Advanced usage
 
-You can specify a custom template to display the suggestions using the results array
-Any boostrap/non-boostrap html is accepted, for example
+You can specify a custom template to display the suggestions using the results array. 
+Any bootstrap/non-boostrap html is accepted, for example
 
 ```html
 <div class="media" ng-repeat="result in results">
@@ -81,9 +80,12 @@ Any boostrap/non-boostrap html is accepted, for example
   <div class="media-body">
     <h4 class="media-heading">{{result.title}}</h4>
     {{result.text}}
+    <p><a href="" class="btc-clickLink" ng-click="select($index)"></a></p>
   </div>
 </div>
 ```
+
+classname "btc-clickLink" id required on any link that fires the selection.
 
 ### Options
 
