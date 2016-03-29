@@ -1,0 +1,21 @@
+{
+  "name": "bootcomplete",
+  "version": "0.0.1",
+  "authors": [
+    "Matteo Leoni <leoni.matteo@gmail.com>"
+  ],
+  "description": "A simple angular autocomplete made for bootstrap3 and font awesome",
+  "keywords": [
+    "autocomplete",
+    "bootstrap",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

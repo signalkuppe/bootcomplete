@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <span class="h4"><small>Next 3 hours forecast for </small>{{results[0].city.name}} ({{results[0].city.country}})</span>
+        <hr />
+        <div class="media" ng-repeat="result in results">
+            <div class="media-left text-center">
+                {{result.dt * 1000 | date:'HH:mm'}}
+                <img ng-src="http://openweathermap.org/img/w/{{result.weather[0].icon}}.png">
+            </div>
+            <div class="media-body">
+                <a href="" class="btn btn-sm btn-default pull-right" ng-click="select($index)">Read More...</a>
+                <h5 class="media-heading">{{result.weather[0].description}} </h5>
+                <span>{{result.main.temp}}°C  {{result.main.humidity}}%</span>
+                <br />
+            </div>
+            <hr style="margin:0;" ng-show="!$last" />
+        </div>
+    </div>
+</div>
