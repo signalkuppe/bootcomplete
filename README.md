@@ -25,7 +25,7 @@
 Simply include the script in your angular application
 
 ```js
-<script src="path_to_the_library/bootcomplete.min.js"></script>
+<script src="path_to_the_library/dist/bootcomplete.min.js"></script>
 ```
 
 And then add the module as a dependency
