@@ -17,27 +17,37 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             btcQuery: '=',
             btcCallback: '='
         },
-        template: "<div class='input-group input-group-{{btcSize}}'>\n"+
-                  "<input placeholder='{{btcPlaceholder}}' type='text' class='form-control' ng-blur='blur($event)' autocomplete=\"off\"/>\n"+
-                  "<span class='input-group-addon'><i class='fa fa-refresh' ng-class=\"{'fa-spin': loading }\"></i></span>\n"+
-                  "</div>",
+        template: "<div class='input-group input-group-{{btcSize}}'>\n" +
+            "<input placeholder='{{btcPlaceholder}}' type='text' class='form-control' ng-blur='blur($event)' autocomplete=\"off\"/>\n" +
+            "<span class='input-group-addon'><i class='fa fa-refresh' ng-class=\"{'fa-spin': loading }\"></i></span>\n" +
+            "</div>",
         link: function (scope, element, attrs, controller) {
 
             var input = element[0].querySelector('.form-control'),
-                suggestionTemplate = "<ul class=\"dropdown-menu\" style=\"position:static;display:block;float:none;}\">\n"+
-                                        "<li ng-class=\"{'active':selectedIndex === $index}\" ng-repeat=\"result in results\" ng-show=\"results.length\">\n"+
-                                           "<a class=\"btc-clickLink\" ng-style=\"{'white-space':'normal'}\" href=\"\" ng-click=\"select($index)\" ng-bind-html=\"result.btclabel\"></a>\n"+
-                                        "</li>\n"+
-                                        "<li class=\"disabled\" ng-hide=\"results.length\">\n"+
-                                          "<a href=\"\">{{noresultsMsg}}</a>\n"+
-                                        "</li>\n"+
-                                      "</ul>";
+                suggestionTemplate = "<ul class=\"dropdown-menu\" style=\"position:static;display:block;float:none;}\">\n" +
+                "<li ng-class=\"{'active':selectedIndex === $index}\" ng-repeat=\"result in results\" ng-show=\"results.length\">\n" +
+                "<a class=\"btc-clickLink\" ng-style=\"{'white-space':'normal'}\" href=\"\" ng-click=\"select($index)\" ng-bind-html=\"result.btclabel\"></a>\n" +
+                "</li>\n" +
+                "<li class=\"disabled\" ng-hide=\"results.length\">\n" +
+                "<a href=\"\">{{noresultsMsg}}</a>\n" +
+                "</li>\n" +
+                "</ul>",
+                _getCords = function () {
+                    var box = input.getBoundingClientRect(),
+                        top = box.top + window.pageYOffset,
+                        left = box.left + window.pageXOffset;
+
+                    scope.top = (top + box.height + 1) + 'px';
+                    scope.left = left + 'px';
+                    scope.width = box.width + 'px';
+                };
 
             scope.results = [];
             scope.selectedIndex = -1;
             scope.minlength = scope.btcMinlength || 1;
             scope.noresultsMsg = scope.btcNoresults || 'Your search yielded no results';
 
+            _getCords();
 
             // select item
             scope.select = function (index) {
@@ -59,13 +69,13 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
             // close on blur
             scope.blur = function (e) {
-                setTimeout(function(){
-                   var focused = document.activeElement;
-                   if(focused.tagName!=='A' && focused.className.indexOf('btc-clickLink')===-1) {
-                    scope.close();
-                    scope.$apply();
-                   }// check the elemnt with focus
-                },1);
+                setTimeout(function () {
+                    var focused = document.activeElement;
+                    if (focused.tagName !== 'A' && focused.className.indexOf('btc-clickLink') === -1) {
+                        scope.close();
+                        scope.$apply();
+                    } // check the elemnt with focus
+                }, 1);
             };
 
             // append element to the DOM
@@ -100,7 +110,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
                     });
                 }
-                if(!scope.search.length) {
+                if (scope.search.length === 0) {
                     scope.close();
                 }
             };
@@ -135,20 +145,9 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
                 scope.$apply();
             };
-    
-            var wrapper = "<div ng-show='visible' ng-style=\"{'position':'fixed','z-index':'10000','top':top,'left':left,'width':width}\" >",
-                wrapper_closure = "</div>",
-                getCords = function (element) {
-                    var de = document.documentElement;
-                    var box = element.getBoundingClientRect();
-                    var top = box.top + window.pageYOffset - de.clientTop;
-                    var left = box.left + window.pageXOffset - de.clientLeft;
-                    return { top: (top + box.height + 1)+'px', left: left+'px', width: box.width+'px' };
-                };
 
-            scope.top = getCords(input).top;
-            scope.left = getCords(input).left;
-            scope.width = getCords(input).width;
+            var wrapper = "<div ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
+                wrapper_closure = "</div>";
 
             if (scope.btcTemplate) {
 
@@ -159,7 +158,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                     scope.makeDom(compiledhtml);
                 });
             } else {
-
+                
                 var output = wrapper + suggestionTemplate + wrapper_closure,
                     compiledhtml = $compile(output)(scope)[0];
 

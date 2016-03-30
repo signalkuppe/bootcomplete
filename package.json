@@ -1,6 +1,6 @@
 {
   "name": "bootcomplete",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A simple angular autocomplete made for bootstrap3",
   "main": "index.js",
   "scripts": {

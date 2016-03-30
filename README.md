@@ -4,7 +4,6 @@
 
 [Demo](http://signalkuppe.github.io/bootcomplete/)
 
-
 ## Features
 * Seamless integration with bootstrap3 and font-awesome, no extra css needed
 * Zero configuration setup for basic usage
@@ -86,6 +85,7 @@ Any bootstrap/non-boostrap html is accepted, for example
 ```
 
 classname "btc-clickLink" id required on any link that fires the selection.
+See index.html, src/app.js,  src/forecast.html for an **advanced usage example.**
 
 ### Options
 
