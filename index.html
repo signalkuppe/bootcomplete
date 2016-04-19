@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="" class="control-label">Custom template openweathermap.org api</label>
-                <bootcomplete btc-minlength="1" btc-maxresults="3" btc-size="md" btc-placeholder="get 3 hour forecast for..." btc-query="forecastSearch" btc-callback="forecastCallback" btc-template="/src/forecast.html" ng-model="forecast"></bootcomplete>
+                <bootcomplete btc-minlength="1" btc-maxresults="3" btc-size="md" btc-placeholder="get 3 hour forecast for..." btc-query="forecastSearch" btc-callback="forecastCallback" btc-template="src/forecast.html" ng-model="forecast"></bootcomplete>
             </div>
             <div class="col-md-12" ng-show="forecast_detail">
                 <hr />
@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="" class="control-label">Custom template with Google maps api</label>
-                <bootcomplete btc-minlength="1" btc-maxresults="5" btc-size="md" btc-placeholder="Search a city..." btc-query="citySearch" btc-template="/src/cities.html" btc-callback="cityCallback2"  ng-model="city3"></bootcomplete>
+                <bootcomplete btc-minlength="1" btc-maxresults="5" btc-size="md" btc-placeholder="Search a city..." btc-query="citySearch" btc-template="src/cities.html" btc-callback="cityCallback2"  ng-model="city3"></bootcomplete>
             </div>
             <div class="col-md-12" ng-show="selected_city2">
                 <span class="label label-info">{{selected_city2}}</span>
