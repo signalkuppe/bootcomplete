@@ -1,8 +1,8 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-if="results.length">
     <div class="panel-body">
         <span class="h4"><small>Next 3 hours forecast for </small>{{results[0].city.name}} ({{results[0].city.country}})</span>
         <hr />
-        <div class="media" ng-repeat="result in results">
+        <div class="media" ng-repeat="result in results" ng-class="{'bg-info':selectedIndex === $index}" style="padding: 10px;">
             <div class="media-left text-center">
                 {{result.dt * 1000 | date:'HH:mm'}}
                 <img ng-src="http://openweathermap.org/img/w/{{result.weather[0].icon}}.png">
@@ -16,5 +16,10 @@
             </div>
             <hr style="margin:0;" ng-show="!$last" />
         </div>
+    </div>
+</div>
+<div class="panel panel-default" ng-if="!results.length">
+    <div class="panel-body">
+        <div class="alert alert-warning">Location not found</div>
     </div>
 </div>
