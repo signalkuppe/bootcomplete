@@ -109,6 +109,11 @@ Type: `String`
 	
 The object property to display in the suggestions (ignored when using a custom template)
 
+#### btc-keepselection
+Type: `String`
+	
+Keeps the result label as the value of the input: suggested for an item field
+
 #### btc-placeholder
 Type: `String`
 	
@@ -122,12 +127,12 @@ search function
 #### btc-callback
 Type: `String`
 	
-callback function
+callback function fired after the selection: the full result is passed as paramter
     
 #### btc-noresults
 Type: `String`
 	
-String to display when the are no results (default: Your search yielded no results)
+String to display when the are no results (default: Your search yielded no results, ignored when using a custom template)
 
 #### btc-template
 Type: `String`

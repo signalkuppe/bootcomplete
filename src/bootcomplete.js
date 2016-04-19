@@ -14,11 +14,13 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             btcPlaceholder: '@',
             btcMaxresults: '@',
             btcNoresults: '@',
+            btcKeepselection: '@',
             btcQuery: '=',
-            btcCallback: '='
+            btcCallback: '=',
+            bindModel: '=ngModel'
         },
         template: "<div class='input-group input-group-{{btcSize}}'>\n" +
-            "<input placeholder='{{btcPlaceholder}}' type='text' class='form-control' ng-blur='blur($event)' autocomplete=\"off\"/>\n" +
+            "<input placeholder='{{btcPlaceholder}}' type='text' class='form-control' ng-model='bindModel' ng-blur='blur($event)' autocomplete=\"off\"/>\n" +
             "<span class='input-group-addon'><i class='fa fa-refresh' ng-class=\"{'fa-spin': loading }\"></i></span>\n" +
             "</div>",
         link: function (scope, element, attrs, controller) {
@@ -47,16 +49,32 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             scope.minlength = scope.btcMinlength || 1;
             scope.noresultsMsg = scope.btcNoresults || 'Your search yielded no results';
 
-            _getCords();
+            scope.$watch("visible", function (newValue, oldValue) {
+                if (newValue === false) {
+                    return;
+                }
+                _getCords();
+            });
 
             // select item
             scope.select = function (index) {
-
+                
                 if (!scope.btcTemplate)
                     delete scope.results[index].btclabel; // delete label from object
+                
+                // clear input if we don't want to display the selection
+                if (!scope.btcKeepselection) {
+                    input.value = '';
+                }
+                // otherwise update the input with the selected value, and get out of focus
+                else {
+                    input.value = scope.results[index][scope.btcLabel];
+                    input.blur();
+                }
+                // call the callback with the result as parameter
+                if (scope.btcCallback)
+                    scope.btcCallback.call(null, scope.results[index]);
 
-                element.controller('ngModel').$setViewValue(scope.results[index]);
-                scope.btcCallback.call();
                 scope.close();
             };
 
@@ -64,14 +82,13 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             scope.close = function () {
                 scope.visible = false;
                 scope.selectedIndex = -1;
-                input.value = '';
             };
 
             // close on blur
             scope.blur = function (e) {
                 setTimeout(function () {
                     var focused = document.activeElement;
-                    if (focused.tagName !== 'A' && focused.className.indexOf('btc-clickLink') === -1) {
+                    if (focused.tagName !== 'A' || focused.className.indexOf('btc-clickLink') === -1) {
                         scope.close();
                         scope.$apply();
                     } // check the elemnt with focus
@@ -83,7 +100,6 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                 document.body.appendChild(html);
             };
 
-
             input.onkeyup = function (e) {
                 scope.search = e.target.value;
                 if (scope.search.length >= scope.minlength && e.keyCode !== 40 && e.keyCode !== 38) {
@@ -93,6 +109,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
                         // max result length
                         scope.results = scope.btcMaxresults ? results.slice(0, scope.btcMaxresults) : results;
+
 
                         // results label
                         if (!scope.btcTemplate) {
@@ -158,7 +175,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                     scope.makeDom(compiledhtml);
                 });
             } else {
-                
+
                 var output = wrapper + suggestionTemplate + wrapper_closure,
                     compiledhtml = $compile(output)(scope)[0];
 
