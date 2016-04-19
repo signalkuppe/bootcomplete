@@ -30,10 +30,6 @@ app
 app
     .controller('autocomplete', function ($scope, ENDPOINT) {
 
-        $scope.reset = function () {
-            $scope.city = $scope.forecast = undefined;
-        };
-
         $scope.citySearch = function (searchstring) {
             return ENDPOINT.city({
                 address: searchstring,
@@ -41,10 +37,9 @@ app
             }).$promise;
         };
 
-        $scope.cityCallback = function () {
-            console.log('city callback fired!');
+        $scope.cityCallback = function (value) {
+            $scope.selected_city = value.formatted_address;
         };
-
 
         $scope.forecastSearch = function (searchstring) {
             return ENDPOINT.forecast({
@@ -55,7 +50,11 @@ app
             }).$promise;
         };
 
-        $scope.forecastCallback = function () {
-            console.log('forecast callback fired!');
+        $scope.forecastCallback = function (value) {
+            $scope.forecast_detail = value;
+        };
+    
+        $scope.cityCallback2 = function (value) {
+            $scope.selected_city2 = value.formatted_address;
         };
     });

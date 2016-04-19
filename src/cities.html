@@ -1,0 +1,15 @@
+<div class="alert alert-warning" ng-if="!results.length">Location not found</div>
+<table class="table table-condensed table-bordered" ng-if="results.length" style="background: white;">
+    <thead>
+        <th>Location</th>
+        <th>Lat</th>
+        <th>Long</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="result in results"  ng-class="{'bg-primary':selectedIndex === $index}">
+            <td>{{result.formatted_address}}</td>
+            <td>{{result.geometry.location.lat}}</td>
+            <td>{{result.geometry.location.lng}}</td>
+        </tr>
+    </tbody>
+</table>
