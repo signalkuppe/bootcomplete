@@ -32,8 +32,8 @@
 
         <div class="row">
             <div class="col-md-12">
-                <label for="" class="control-label">Basic usage, Google maps api</label>
-                <bootcomplete btc-minlength="1" btc-maxresults="5" btc-size="md" btc-label="formatted_address" btc-placeholder="Search a city..." btc-query="citySearch" btc-noresults="No results!" btc-callback="cityCallback" ng-model="city"></bootcomplete>
+                <label for="" class="control-label">Basic usage Google maps api</label>
+                <bootcomplete btc-minlength="1" btc-maxresults="5" btc-size="md" btc-label="formatted_address" btc-placeholder="Search a city..." btc-query="citySearch" btc-noresults="No results!" btc-callback="cityCallback"  ng-model="city"></bootcomplete>
             </div>
             <div class="col-md-12" ng-show="selected_city">
                 <span class="label label-info">{{selected_city}}</span>
@@ -80,7 +80,7 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="" class="control-label">Custom template with Google maps api</label>
-                <bootcomplete btc-minlength="1" btc-maxresults="5" btc-size="md" btc-placeholder="Search a city..." btc-query="citySearch" btc-template="/src/cities.html" btc-callback="cityCallback2"  ng-model="city3"></bootcomplete>
+                <bootcomplete btc-minlength="1" btc-maxresults="5" btc-size="md" btc-placeholder="Search a city..." btc-query="citySearch" btc-template="/src/cities.html" btc-callback="cityCallback2" ng-model="city3"></bootcomplete>
             </div>
             <div class="col-md-12" ng-show="selected_city2">
                 <span class="label label-info">{{selected_city2}}</span>

@@ -85,7 +85,7 @@ Any bootstrap/non-boostrap html is accepted, for example
 ```
 
 classname "btc-clickLink" id required on any link that fires the selection.
-See index.html, src/app.js,  src/forecast.html for an **advanced usage example.**
+See index.html, src/app.js,  src/forecast.html for a **usage examples**
 
 ### Options
 
@@ -112,7 +112,8 @@ The object property to display in the suggestions (ignored when using a custom t
 #### btc-keepselection
 Type: `String`
 	
-Keeps the result label as the value of the input: suggested for an item field
+If set to true, keeps the result label as the value of the input: suggested for an item field in a form.
+In this case the input won't be cleared after closing the suggestions.
 
 #### btc-placeholder
 Type: `String`

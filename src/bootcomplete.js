@@ -15,6 +15,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             btcMaxresults: '@',
             btcNoresults: '@',
             btcKeepselection: '@',
+            btcEmptyonclose:'@',
             btcQuery: '=',
             btcCallback: '=',
             bindModel: '=ngModel'
@@ -82,6 +83,8 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             scope.close = function () {
                 scope.visible = false;
                 scope.selectedIndex = -1;
+                if(!scope.btcKeepselection)
+                    input.value='';
             };
 
             // close on blur
@@ -102,7 +105,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
             input.onkeyup = function (e) {
                 scope.search = e.target.value;
-                if (scope.search.length >= scope.minlength && e.keyCode !== 40 && e.keyCode !== 38) {
+                if (scope.search.length >= scope.minlength && e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 27) {
                     scope.loading = true;
                     var promise = scope.btcQuery.call(null, scope.search);
                     promise.then(function (results) {
