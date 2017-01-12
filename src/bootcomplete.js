@@ -74,7 +74,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                 }
                 // call the callback with the result as parameter
                 if (scope.btcCallback)
-                    scope.btcCallback.call(null, scope.results[index]);
+                    scope.btcCallback.call(this, scope.results[index]);
 
                 scope.close();
             };
