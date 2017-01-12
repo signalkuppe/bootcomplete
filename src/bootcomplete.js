@@ -184,7 +184,6 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
 
                 scope.makeDom(compiledhtml);
             }
-
         }
     };
 }]);
