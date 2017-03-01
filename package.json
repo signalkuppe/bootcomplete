@@ -14,6 +14,7 @@
   "author": "Matteo Leoni <leoni.matteo@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "grunt": "^1.0.1",
     "grunt-contrib-connect": "^1.0.1",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^1.0.1"
