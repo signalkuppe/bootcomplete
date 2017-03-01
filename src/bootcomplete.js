@@ -173,7 +173,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                 scope.$apply();
             };
 
-            var wrapper = "<div ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
+            var wrapper = "<div class='wrapper_bootcomplete' ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
                 wrapper_closure = "</div>";
 
             if (scope.btcTemplate) {
