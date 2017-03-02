@@ -21,6 +21,11 @@
 * Font awesome
 
 ### Basic usage
+Install for Bower users,
+```bash
+bower install bootcomplete
+```
+
 Simply include the script in your angular application
 
 ```js

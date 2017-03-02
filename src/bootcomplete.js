@@ -103,6 +103,13 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                 document.body.appendChild(html);
             };
 
+            scope.$on('$destroy', function () {
+                var elements = document.body.getElementsByClassName('wrapper_bootcomplete');
+                while(elements.length > 0){
+                    elements[0].parentNode.removeChild(elements[0]);
+                }
+            });
+            
             input.onkeyup = function (e) {
                 scope.search = e.target.value;
                 if (scope.search.length >= scope.minlength && e.keyCode !== 40 && e.keyCode !== 38 && e.keyCode !== 27) {
@@ -166,7 +173,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                 scope.$apply();
             };
 
-            var wrapper = "<div ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
+            var wrapper = "<div class='wrapper_bootcomplete' ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
                 wrapper_closure = "</div>";
 
             if (scope.btcTemplate) {
