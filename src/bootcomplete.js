@@ -104,7 +104,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
             };
 
             scope.$on('$destroy', function () {
-                var elements = document.body.getElementsByClassName('wrapper_bootcomplete');
+                var elements = document.body.getElementsByClassName('bootcomplete_wrapper');
                 while(elements.length > 0){
                     elements[0].parentNode.removeChild(elements[0]);
                 }
@@ -173,7 +173,7 @@ directive('bootcomplete', ["$compile", "$templateRequest", "$timeout", "$sce", f
                 scope.$apply();
             };
 
-            var wrapper = "<div class='wrapper_bootcomplete' ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
+            var wrapper = "<div class='bootcomplete_wrapper' ng-show='visible' ng-style=\"{'position':'absolute','z-index':'10000','top':top,'left':left,'width':width}\" >",
                 wrapper_closure = "</div>";
 
             if (scope.btcTemplate) {
